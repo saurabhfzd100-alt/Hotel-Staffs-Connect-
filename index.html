@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Staff Connect</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#182238}
+header{background:#142d4e;color:white;padding:22px 15px;text-align:center}
+header h1{margin:0 0 8px;color:#f4d28b}
+nav{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;padding:14px;background:#fff}
+nav a{color:#142d4e;text-decoration:none;font-weight:bold}
+.hero{padding:35px 18px;text-align:center;background:#e8eef7}
+.hero h2{font-size:27px}
+.btn{display:inline-block;background:#137b52;color:white;padding:12px 17px;border:0;border-radius:8px;text-decoration:none;font-weight:bold;cursor:pointer;margin:5px}
+.btn2{background:#142d4e}
+section{padding:22px 15px;max-width:900px;margin:auto}
+.card{background:white;padding:18px;border-radius:12px;margin:12px 0;box-shadow:0 2px 8px #0000000c}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #ccd2dc;border-radius:7px;font-size:16px}
+label{font-weight:bold}
+h2{color:#142d4e}
+footer{background:#142d4e;color:white;text-align:center;padding:22px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Hotel Staff Connect</h1>
+<p>होटल के लिए सही स्टाफ • नौकरी के लिए सही अवसर</p>
+</header>
+
+<nav>
+<a href="#home">होम</a>
+<a href="#jobs">वैकेंसी</a>
+<a href="#hotel">होटल मालिक</a>
+<a href="#candidate">नौकरी आवेदन</a>
+<a href="#about">हमारे बारे में</a>
+</nav>
+
+<div class="hero" id="home">
+<h2>होटल में स्टाफ की जरूरत है?</h2>
+<p>Receptionist, Chef, Kitchen Staff, Manager और अन्य पदों के लिए संपर्क करें।</p>
+<a class="btn" href="#hotel">स्टाफ की मांग भेजें</a>
+<a class="btn btn2" href="#candidate">नौकरी के लिए आवेदन करें</a>
+</div>
+
+<section id="jobs">
+<h2>होटल जॉब वैकेंसी</h2>
+<div id="jobList"></div>
+<p>नई वैकेंसी की जानकारी के लिए हमसे WhatsApp पर संपर्क करें।</p>
+<a class="btn" href="#" onclick="contact('मुझे होटल जॉब वैकेंसी की जानकारी चाहिए।')">WhatsApp पर पूछें</a>
+</section>
+
+<section id="hotel">
+<div class="card">
+<h2>होटल मालिक: स्टाफ की मांग भेजें</h2>
+<form onsubmit="sendHotel(event)">
+<label>होटल का नाम</label>
+<input id="hotelName" required>
+<label>संपर्क व्यक्ति का नाम</label>
+<input id="ownerName" required>
+<label>मोबाइल नंबर</label>
+<input id="ownerPhone" type="tel" required>
+<label>शहर</label>
+<select id="hotelCity">
+<option>अयोध्या</option><option>आजमगढ़</option>
+<option>वाराणसी</option><option>अन्य</option>
+</select>
+<label>किस पद के लिए स्टाफ चाहिए?</label>
+<select id="staffRole">
+<option>Receptionist</option><option>Chef</option>
+<option>Kitchen Staff</option><option>General Manager</option>
+<option>Hotel Manager</option><option>Housekeeping</option>
+<option>Waiter</option><option>Front Office Manager</option>
+<option>Security Guard</option><option>Accountant</option>
+<option>Other</option>
+</select>
+<label>कितने कर्मचारी चाहिए?</label>
+<input id="staffCount" type="number" min="1" required>
+<label>मासिक सैलरी (₹)</label>
+<input id="staffSalary" placeholder="जैसे 15000-20000">
+<label>अन्य जानकारी</label>
+<textarea id="hotelNote" rows="3"></textarea>
+<button class="btn">WhatsApp पर रिक्वेस्ट भेजें</button>
+</form>
+</div>
+</section>
+
+<section id="candidate">
+<div class="card">
+<h2>नौकरी के लिए रजिस्ट्रेशन</h2>
+<form onsubmit="sendCandidate(event)">
+<label>पूरा नाम</label>
+<input id="candName" required>
+<label>मोबाइल नंबर</label>
+<input id="candPhone" type="tel" required>
+<label>अनुभव</label>
+<select id="candExp">
+<option>Fresher</option><option>1 साल</option>
+<option>2-3 साल</option><option>4-6 साल</option>
+<option>7 साल या अधिक</option>
+</select>
+<label>किस पद पर नौकरी चाहिए?</label>
+<select id="candRole">
+<option>Receptionist</option><option>Chef</option>
+<option>Kitchen Staff</option><option>General Manager</option>
+<option>Hotel Manager</option><option>Housekeeping</option>
+<option>Waiter</option><option>Front Office Manager</option>
+<option>Security Guard</option><option>Accountant</option>
+<option>Other</option>
+</select>
+<label>किस शहर में नौकरी चाहिए?</label>
+<select id="candCity">
+<option>अयोध्या</option><option>आजमगढ़</option>
+<option>वाराणसी</option><option>अन्य</option>
+</select>
+<label>अपेक्षित मासिक सैलरी (₹)</label>
+<input id="candSalary" placeholder="जैसे 18000">
+<button class="btn">WhatsApp पर आवेदन भेजें</button>
+</form>
+</div>
+</section>
+
+<section id="about">
+<div class="card">
+<h2>हमारे बारे में</h2>
+<p>Hotel Staff Connect होटल और नौकरी के उम्मीदवारों को जोड़ने के लिए एक भर्ती सेवा है। हम होटल की स्टाफ जरूरत और उम्मीदवार की जानकारी लेकर भर्ती प्रक्रिया में सहायता करते हैं। नौकरी की उपलब्धता और चयन होटल पर निर्भर करेगा।</p>
+<h3>हमारी सेवाएं</h3>
+<p>Receptionist • Chef • Kitchen Staff • Hotel Manager • Housekeeping • Waiter • अन्य होटल पद</p>
+<p><b>सेवा क्षेत्र:</b> अयोध्या, आजमगढ़ और वाराणसी</p>
+<p><b>संपर्क:</b> 6394689515</p>
+<a class="btn" href="#" onclick="contact('नमस्ते, मुझे Hotel Staff Connect की सेवा के बारे में जानकारी चाहिए।')">हमसे संपर्क करें</a>
+</div>
+</section>
+
+<section>
+<div class="card">
+<h2>Admin Panel – Demo</h2>
+<p>यह केवल शुरुआती डेमो है। वैकेंसी जोड़ने का विकल्प नीचे है। यह अभी सुरक्षित ऑनलाइन एडमिन सिस्टम नहीं है।</p>
+<label>डेमो पासकोड</label>
+<input id="adminPass" type="password" placeholder="डेमो पासकोड: 1234">
+<button class="btn btn2" onclick="adminLogin()">Admin Login</button>
+<div id="adminArea" class="hidden">
+<label>पद</label><input id="newRole" placeholder="जैसे Receptionist">
+<label>शहर</label><input id="newCity" placeholder="जैसे अयोध्या">
+<label>सैलरी</label><input id="newSalary" placeholder="जैसे ₹15000">
+<label>अन्य जानकारी</label><input id="newInfo" placeholder="अनुभव/शिफ्ट आदि">
+<button class="btn" onclick="addJob()">वैकेंसी जोड़ें</button>
+</div>
+</div>
+</section>
+
+<footer>
+<p>Hotel Staff Connect</p>
+<p>होटल भर्ती एवं स्टाफ सहायता सेवा</p>
+<p>WhatsApp / Call: 6394689515</p>
+<small>नौकरी की गारंटी नहीं। भर्ती होटल की शर्तों और चयन पर निर्भर है।</small>
+</footer>
+
+<script>
+const BUSINESS_NUMBER = "916394689515";
+
+function contact(message){
+  window.open("https://wa.me/"+BUSINESS_NUMBER+
+  "?text="+encodeURIComponent(message),"_blank");
+}
+
+function val(id){return document.getElementById(id).value.trim()}
+
+function sendHotel(e){
+  e.preventDefault();
+  let msg = "HOTEL STAFF REQUIREMENT\n"+
+  "Hotel: "+val("hotelName")+"\n"+
+  "Contact person: "+val("ownerName")+"\n"+
+  "Phone: "+val("ownerPhone")+"\n"+
+  "City: "+val("hotelCity")+"\n"+
+  "Position: "+val("staffRole")+"\n"+
+  "Staff required: "+val("staffCount")+"\n"+
+  "Salary: "+val("staffSalary")+"\n"+
+  "Details: "+val("hotelNote");
+  contact(msg);
+}
+
+function sendCandidate(e){
+  e.preventDefault();
+  let msg = "JOB APPLICATION\n"+
+  "Name: "+val("candName")+"\n"+
+  "Phone: "+val("candPhone")+"\n"+
+  "Experience: "+val("candExp")+"\n"+
+  "Position: "+val("candRole")+"\n"+
+  "Preferred city: "+val("candCity")+"\n"+
+  "Expected salary: "+val("candSalary");
+  contact(msg);
+}
+
+let jobs = [
+ {role:"Receptionist",city:"अयोध्या",salary:"₹15,000–₹18,000",info:"अनुभवी उम्मीदवार संपर्क करें"},
+ {role:"Kitchen Staff",city:"वाराणसी",salary:"होटल से पुष्टि करें",info:"वैकेंसी की पुष्टि जरूरी है"},
+ {role:"Housekeeping",city:"आजमगढ़",salary:"होटल से पुष्टि करें",info:"वैकेंसी की पुष्टि जरूरी है"}
+];
+
+function renderJobs(){
+ document.getElementById("jobList").innerHTML = jobs.map(j=>
+ `<div class="card"><h3>${safe(j.role)}</h3>
+ <p>📍 शहर: ${safe(j.city)}</p>
+ <p>💰 सैलरी: ${safe(j.salary)}</p>
+ <p>${safe(j.info)}</p>
+ <button class="btn" onclick="contact('मुझे '+${JSON.stringify(j.role)}+' की वैकेंसी के बारे में जानकारी चाहिए।')">Apply / जानकारी</button></div>`
+ ).join("");
+}
+function safe(s){
+ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function adminLogin(){
+ if(val("adminPass")==="1234"){
+  document.getElementById("adminArea").classList.remove("hidden");
+  alert("Demo panel खुल गया। यह सार्वजनिक वेबसाइट के लिए सुरक्षित लॉगिन नहीं है।");
+ }else alert("पासकोड गलत है");
+}
+function addJob(){
+ if(!val("newRole")||!val("newCity")){alert("पद और शहर भरें");return}
+ jobs.push({role:val("newRole"),city:val("newCity"),
+ salary:val("newSalary")||"होटल से पुष्टि करें",
+ info:val("newInfo")||"अधिक जानकारी के लिए संपर्क करें"});
+ renderJobs();
+ alert("वैकेंसी इस पेज पर जोड़ दी गई। यह अभी ऑनलाइन डेटाबेस में सेव नहीं होती।");
+}
+renderJobs();
+</script>
+</body>
+</html>
